@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Routes } from '@/interfaces/routes.interface';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import SellersController from '@/controllers/seller.controller';
-import { CreateSellerDto } from '@/dtos/seller.dto';
+import { CreateSellerDto } from '@/dtos/sellers.dto';
 
 class SellersRoute implements Routes {
   public path = '/sellers';

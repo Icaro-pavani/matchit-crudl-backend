@@ -5,9 +5,11 @@ export class CreateSellerDto {
   public name: string;
 
   @IsString()
-  @Matches(/^\d{3}/)
+  @Matches(/^\d{2}.\d{3}.\d{3}\/\d{4}-\d{2}$/, {
+    message: 'CNPJ must be in the format 00.000.000/0001-00',
+  })
   public cnpj: string;
 
   @IsString()
-  public adress: string;
+  public address: string;
 }

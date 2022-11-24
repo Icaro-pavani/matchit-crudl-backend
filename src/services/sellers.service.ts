@@ -3,7 +3,7 @@ import { HttpException } from '@/exceptions/HttpException';
 import { isEmpty } from '@/utils/util';
 import { Seller } from '@/interfaces/sellers.interface';
 import { SellerEntity } from '@/entities/sellers.entity';
-import { CreateSellerDto } from '@/dtos/seller.dto';
+import { CreateSellerDto } from '@/dtos/sellers.dto';
 
 @EntityRepository()
 class SellerService extends Repository<SellerEntity> {

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Seller } from '@/interfaces/sellers.interface';
 import SellerService from '@/services/sellers.service';
-import { CreateSellerDto } from '@/dtos/seller.dto';
+import { CreateSellerDto } from '@/dtos/sellers.dto';
 
 class SellersController {
   public sellerService = new SellerService();

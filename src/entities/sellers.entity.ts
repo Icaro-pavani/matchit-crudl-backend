@@ -18,5 +18,5 @@ export class SellerEntity extends BaseEntity implements Seller {
 
   @Column()
   @IsNotEmpty()
-  adress: string;
+  address: string;
 }
