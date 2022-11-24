@@ -23,7 +23,7 @@ class App {
   constructor(routes: Routes[]) {
     this.app = express();
     this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+    this.port = PORT || 5000;
 
     this.env !== 'test' && this.connectToDatabase();
     this.initializeMiddlewares();

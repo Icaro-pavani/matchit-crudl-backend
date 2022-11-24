@@ -156,4 +156,33 @@ describe('Testing Sellers', () => {
       expect(response.statusCode).toBe(409);
     });
   });
+
+  describe('[DELETE] /sellers/:id', () => {
+    it('should respond status 200 with correct id', async () => {
+      const sellerData: CreateSellerDto = {
+        name: 'Company test',
+        cnpj: '44.637.384/0001-64',
+        address: 'R. Lorem Solum, 500 - Lorem/SP',
+      };
+      const testSeller = await SellerEntity.create(sellerData).save();
+
+      const sellersRoute = new SellerRoute();
+
+      const app = new App([sellersRoute]);
+      const response = await request(app.getServer()).delete(`${sellersRoute.path}/${testSeller.id}`);
+
+      expect(response.statusCode).toBe(200);
+      const sellers = await SellerEntity.find();
+      expect(sellers).toHaveLength(0);
+    });
+
+    it('should respond status 409 with incorrect id', async () => {
+      const sellersRoute = new SellerRoute();
+
+      const app = new App([sellersRoute]);
+      const response = await request(app.getServer()).delete(`${sellersRoute.path}/1`);
+
+      expect(response.statusCode).toBe(409);
+    });
+  });
 });
