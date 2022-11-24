@@ -1,35 +1,55 @@
 tags:
-- name: users
-  description: users API
+- name: sellers
+  description: sellers API
 
 paths:
-# [GET] users
-  /users:
+# [GET] sellers
+  /sellers:
     get:
       tags:
-      - users
-      summary: Find All Users
+      - sellers
+      summary: Find All Sellers
+      description: Route responsible to obtain all sellers presents in the database
       responses:
         200:
           description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/seller'                
+                  message:
+                    type: string
         500:
           description: 'Server Error'
 
-# [POST] users
+# [POST] sellers
     post:
       tags:
-      - users
-      summary: Add User
-      parameters:
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+      - sellers
+      summary: Add Seller
+      description: Route responsible to add one seller to the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sellerData'
       responses:
         201:
           description: 'Created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    $ref: '#/components/schemas/seller'                
+                  message:
+                    type: string
         400:
           description: 'Bad Request'
         409:
@@ -37,46 +57,65 @@ paths:
         500:
           description: 'Server Error'
 
-# [GET] users/id
-  /users/{id}:
+# [GET] sellers/id
+  /sellers/{id}:
     get:
       tags:
-      - users
-      summary: Find User By Id
+      - sellers
+      summary: Find Seller By Id
+      description: Route responsible to obtain one specific seller from the database
       parameters:
       - name: id
         in: path
-        description: User Id
+        description: Seller Id
         required: true
         type: integer
       responses:
         200:
           description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    $ref: '#/components/schemas/seller'                
+                  message:
+                    type: string
         409:
           description: 'Conflict'
         500:
           description: 'Server Error'
 
-# [PUT] users/id
+# [PUT] sellers/id
     put:
       tags:
-      - users
-      summary: Update User By Id
+      - sellers
+      summary: Update Seller By Id
+      description: Route responsible to update one seller information
       parameters:
       - name: id
         in: path
         description: user Id
         required: true
         type: integer
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sellerData'
       responses:
         200:
           description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    $ref: '#/components/schemas/seller'                
+                  message:
+                    type: string
         400:
           description: 'Bad Request'
         409:
@@ -84,39 +123,70 @@ paths:
         500:
           description: 'Server Error'
 
-# [DELETE] users/id
+# [DELETE] sellers/id
     delete:
       tags:
-      - users
-      summary: Delete User By Id
+      - sellers
+      summary: Delete Seller By Id
+      description: Route responsible to delete one seller from the database
       parameters:
       - name: id
         in: path
-        description: user Id
+        description: seller Id
         required: true
         type: integer
       responses:
         200:
           description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    $ref: '#/components/schemas/seller'                
+                  message:
+                    type: string
         409:
           description: 'Conflict'
         500:
           description: 'Server Error'
 
-# definitions
-definitions:
-  users:
-    type: object
-    required:
-        - email
-        - password
-    properties:
-      email:
-        type: string
-        description: user Email
-      password:
-        type: string
-        description: user Password
+# components
+components:
+  schemas:
+    sellerData:
+      type: object
+      required:
+          - name
+          - cnpj
+          - address
+      properties:
+        name:
+          type: string
+          description: seller Name
+        cnpj:
+          type: string
+          description: seller Registry (CNPJ)
+        address:
+          type: string
+          description: seller Address
+    
+    seller:
+      type: object
+      properties:
+        id: 
+          type: number
+          description: sellers Id
+        name:
+          type: string
+          description: seller Name
+        cnpj: 
+          type: string
+          description: seller Registry (CNPJ)
+        address: 
+          type: string
+          description: seller Address
 
 schemes:
  - https

@@ -68,12 +68,19 @@ class App {
 
   private initializeSwagger() {
     const options = {
-      swaggerDefinition: {
+      definition: {
+        openapi: '3.0.0',
         info: {
-          title: 'REST API',
+          title: 'MatchIt CRUDL API',
           version: '1.0.0',
-          description: 'Example docs',
+          description: 'This API has the objective to execute a CRUDL using express, typescript and typeorm',
         },
+        servers: [
+          {
+            url: 'http://localhost:5000',
+            description: 'test API',
+          },
+        ],
       },
       apis: ['swagger.yaml'],
     };

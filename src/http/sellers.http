@@ -1,0 +1,36 @@
+# baseURL
+@baseURL = http://localhost:5000
+
+###
+# Find All Sellers
+GET {{ baseURL }}/sellers
+
+###
+# Find Seller By Id
+GET {{ baseURL }}/sellers/1
+
+###
+# Create Seller
+POST {{ baseURL }}/sellers
+Content-Type: application/json
+
+{
+    "name": "example@email.com",
+    "cnpj": "00.000.000/0001-00"
+	"address": "address"
+}
+
+###
+# Modify Seller By Id
+PUT {{ baseURL }}/sellers/1
+Content-Type: application/json
+
+{
+    "name": "example@email.com",
+    "cnpj": "00.000.000/0001-00"
+	"address": "address"
+}
+
+###
+# Delete Seller By Id
+DELETE {{ baseURL }}/sellers/1
