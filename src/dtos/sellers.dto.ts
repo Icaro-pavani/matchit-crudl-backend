@@ -1,7 +1,8 @@
-import { IsString, Matches } from 'class-validator';
+import { IsString, Matches, MinLength } from 'class-validator';
 
 export class CreateSellerDto {
   @IsString()
+  @MinLength(3)
   public name: string;
 
   @IsString()
@@ -11,5 +12,6 @@ export class CreateSellerDto {
   public cnpj: string;
 
   @IsString()
+  @MinLength(3)
   public address: string;
 }
